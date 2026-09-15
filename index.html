@@ -145,7 +145,12 @@
         try {
             activeStream = await navigator.mediaDevices.getUserMedia({ 
                 video: { width: 1280, height: 720 }, 
-                audio: true 
+                // Disable voice call processing which muffles music
+                audio: {
+                    echoCancellation: false,
+                    noiseSuppression: false,
+                    autoGainControl: false
+                }
             });
             webcam.srcObject = activeStream;
             setupBtn.style.display = 'none';
